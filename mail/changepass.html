@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Change Password</title>
+  <link rel="stylesheet" href="https://unpkg.com/xp.css">
+  <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
+  <style>
+    body {
+      background: teal;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .window {
+      width: 400px;
+    }
+    label, select, input {
+      display: block;
+      margin-top: 10px;
+    }
+    input[type="text"], input[type="password"], select {
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <div class="window">
+    <div class="title-bar">
+      <div class="title-bar-text">Change Password</div>
+      <div class="title-bar-controls">
+  <button aria-label="Close" onclick="location.href='index.html'"></button>
+</div>
+
+    </div>
+    <div class="window-body">
+      <form id="changeForm">
+        <label for="email">Username</label>
+        <input type="text" id="email" placeholder="e.g. myname">
+
+        <label for="domain">Domain</label>
+        <select id="domain">
+          <option value="domain">@domain</option>
+        </select>
+
+        <label for="oldpw">Current Password</label>
+        <input type="password" id="oldpw">
+
+        <label for="newpw">New Password</label>
+        <input type="password" id="newpw">
+
+        <div class="h-captcha" data-sitekey="YOUR_HCAPTCHA_SITE_KEY" style="margin-top: 10px;"></div>
+
+        <div style="margin-top: 15px;">
+          <button type="submit" class="button">Change Password</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('changeForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const email = document.getElementById('email').value.trim();
+      const domain = document.getElementById('domain').value;
+      const oldpw = document.getElementById('oldpw').value;
+      const newpw = document.getElementById('newpw').value;
+      const hcaptcha = document.querySelector('[name=\"h-captcha-response\"]');
+
+      if (!email || !oldpw || !newpw || !hcaptcha || !hcaptcha.value) {
+        alert('All fields including hCaptcha must be completed.');
+        return;
+      }
+
+      if (newpw.length < 8) {
+        alert('New password must be at least 8 characters long.');
+        return;
+      }
+
+      fetch('security/backend/changepassword.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams({
+          email: email,
+          domain: domain,
+          old_password: oldpw,
+          new_password: newpw,
+          'h-captcha-response': hcaptcha.value
+        })
+      })
+      .then(async response => {
+        if (response.ok) return response.text();
+        throw await response.text();
+      })
+      .then(data => {
+        if (data === 'success') {
+          alert('Password changed successfully!');
+          document.getElementById('changeForm').reset();
+          hcaptcha && hcaptcha.reset && hcaptcha.reset();
+        } else {
+          alert(data);
+        }
+      })
+      .catch(err => {
+        alert('An error occurred: ' + err);
+      });
+    });
+  </script>
+</body>
+</html>

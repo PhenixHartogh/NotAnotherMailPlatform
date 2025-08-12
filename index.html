@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>NAMP Portal</title>
+  <link rel="stylesheet" href="https://unpkg.com/xp.css">
+  <style>
+    body {
+      background: teal;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .window {
+      width: 300px;
+    }
+    .window-body {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding: 20px;
+    }
+    .button {
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <div class="window">
+    <div class="title-bar">
+      <div class="title-bar-text">Not Another Mail Platform</div>
+    </div>
+    <div class="window-body">
+      <button class="button" onclick="location.href='mail'">Mail</button>
+      <button class="button" onclick="location.href='support.html'">Support</button>
+      <button class="button" onclick="location.href='other'">Policies & Misc</button>
+      <button class="button" onclick="location.href='wc.html'">Admin</button>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Error</title>
+  <link rel="stylesheet" href="https://unpkg.com/xp.css">
+  <style>
+    body {
+      background: teal;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .window {
+      width: 400px;
+    }
+    .window-body {
+      padding: 20px;
+      font-size: 14px;
+    }
+    .error-code {
+      font-weight: bold;
+      font-size: 16px;
+      color: darkred;
+      margin-bottom: 5px;
+    }
+    .message {
+      margin-bottom: 15px;
+    }
+    .button {
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <div class="window">
+    <div class="title-bar">
+      <div class="title-bar-text">Oops! Something went wrong</div>
+      <div class="title-bar-controls">
+        <button aria-label="Close" onclick="location.href='index.html'"></button>
+      </div>
+    </div>
+    <div class="window-body">
+      <div class="error-code">Error <span id="errorCode">Unknown</span></div>
+      <div class="message" id="errorMessage">An unexpected error occurred.</div>
+      <button class="button" onclick="location.href='index.html'">Return to Home</button>
+    </div>
+  </div>
+
+  <script>
+    const messages = {
+      400: "The server couldn’t understand the request.",
+      401: "You must log in to access this resource.",
+      403: "You don't have permission to access this.",
+      405: "The request method is not supported.",
+      406: "The requested format is not supported.",
+      408: "The server timed out waiting for the request.",
+      420: "You're making requests too quickly.",
+      500: "Something broke on our end.",
+      502: "Invalid response from upstream server.",
+      503: "This service is unavailable. Try again later.",
+      504: "Server didn't respond in time.",
+      507: "The server is out of space.",
+      508: "This request has been cancelled, as it caused an infinite loop."
+    };
+
+    const code = new URLSearchParams(window.location.search).get('code');
+    if (code && messages[code]) {
+      document.getElementById('errorCode').textContent = code;
+      document.getElementById('errorMessage').textContent = messages[code];
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,119 @@
+1<!DOCTYPE html>
+<html>
+<head>
+  <title>Mail Signup</title>
+  <link rel="stylesheet" href="https://unpkg.com/xp.css">
+  <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
+  <style>
+    body {
+      background: teal;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .window {
+      width: 400px;
+    }
+    label, select, input {
+      display: block;
+      margin-top: 10px;
+    }
+    input[type="text"], input[type="password"], select {
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <div class="window">
+    <div class="title-bar">
+      <div class="title-bar-text">Sign Up</div>
+      <div class="title-bar-controls">
+  <button aria-label="Close" onclick="location.href='index.html'"></button>
+</div>
+</div>
+    <div class="window-body">
+      <form id="signupForm">
+        <label for="email">Username</label>
+        <input type="text" id="email" placeholder="e.g. myname">
+
+        <label for="domain">Domain</label>
+        <select id="domain">
+          <option value="domain">@domain</option>
+        </select>
+
+        <label for="pw1">Password</label>
+        <input type="password" id="pw1">
+
+        <label for="pw2">Confirm Password</label>
+        <input type="password" id="pw2">
+
+        <div class="h-captcha" data-sitekey="YOUR_HCAPTCHA_SITE_KEY" style="margin-top: 10px;"></div>
+
+        <div style="margin-top: 15px;">
+          <button type="submit" class="button">Create Email (by creating an email, you agree to the Privacy Policy & Terms and Conditions which can be found at namp.xyz)</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('signupForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const email = document.getElementById('email').value.trim();
+      const domain = document.getElementById('domain').value;
+      const pw1 = document.getElementById('pw1').value;
+      const pw2 = document.getElementById('pw2').value;
+      const hcaptcha = document.querySelector('[name="h-captcha-response"]');
+
+      if (!email || !pw1 || !pw2 || !hcaptcha || !hcaptcha.value) {
+        alert('All fields including hCaptcha must be completed.');
+        return;
+      }
+
+      if (!/^[a-zA-Z0-9.]+$/.test(email)) {
+        alert('Only letters, numbers, and periods allowed in email name.');
+        return;
+      }
+
+      if (pw1 !== pw2) {
+        alert('Passwords do not match.');
+        return;
+      }
+
+      if (pw1.length < 8) {
+        alert('Password must be at least 8 characters long.');
+        return;
+      }
+
+      fetch('security/backend/submit.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams({
+          email: email,
+          domain: domain,
+          password: pw1,
+          'h-captcha-response': hcaptcha.value
+        })
+      })
+      .then(async response => {
+        if (response.ok) return response.text();
+        throw await response.text();
+      })
+      .then(data => {
+        if (data === 'success') {
+          alert('Email created successfully!');
+          document.getElementById('signupForm').reset();
+          hcaptcha && hcaptcha.reset && hcaptcha.reset();
+        } else {
+          alert(data);
+        }
+      })
+      .catch(err => {
+        alert('An error occurred: ' + err);
+      });
+    });
+  </script>
+</body>
+</html>

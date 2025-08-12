@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>NAMP Portal</title>
+  <link rel="stylesheet" href="https://unpkg.com/xp.css">
+  <style>
+    body {
+      background: teal;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .window {
+      width: 300px;
+    }
+    .window-body {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding: 20px;
+    }
+    .button {
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <div class="window">
+  <div class="window">
+    <div class="title-bar">
+      <div class="title-bar-text">Mail Portal</div>
+      <div class="title-bar-controls">
+  <button aria-label="Close" onclick="location.href='/index.html'"></button>
+</div>
+</div>
+    <div class="window-body">
+      <button class="button" onclick="location.href='roundcube'">Webmail</button>
+      <button class="button" onclick="location.href='signup.html'">Signup</button>
+      <button class="button" onclick="location.href='changepass.html'">Change Password</button>
+      <button class="button" onclick="location.href='setup.html'">Email Client Instructions</button>
+  </div>
+</body>
+</html>

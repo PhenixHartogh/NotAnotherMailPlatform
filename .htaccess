@@ -1,0 +1,13 @@
+ErrorDocument 400 /error.html?code=400
+ErrorDocument 401 /error.html?code=401
+ErrorDocument 403 /error.html?code=403
+ErrorDocument 405 /error.html?code=405
+ErrorDocument 406 /error.html?code=406
+ErrorDocument 408 /error.html?code=408
+ErrorDocument 420 /error.html?code=420
+ErrorDocument 500 /error.html?code=500
+ErrorDocument 502 /error.html?code=502
+ErrorDocument 503 /error.html?code=503
+ErrorDocument 504 /error.html?code=504
+ErrorDocument 507 /error.html?code=507
+ErrorDocument 508 /error.html?code=508

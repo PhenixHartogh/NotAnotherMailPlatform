@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Email Client Setup</title>
+  <link rel="stylesheet" href="https://unpkg.com/xp.css">
+  <style>
+    body {
+      background: teal;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .window {
+      width: 500px;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+    .window-body {
+      padding: 20px;
+      font-size: 14px;
+    }
+    h1 {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+    h2 {
+      font-size: 16px;
+      margin-top: 20px;
+    }
+    ul {
+      margin-bottom: 10px;
+    }
+    p {
+      margin-bottom: 10px;
+    }
+    code {
+      background: #eee;
+      padding: 2px 4px;
+      font-family: monospace;
+    }
+  </style>
+</head>
+<body>
+  <div class="window">
+    <div class="title-bar">
+      <div class="title-bar-text">Email Client Setup</div>
+      <div class="title-bar-controls">
+        <button aria-label="Close" onclick="location.href='index.html'"></button>
+      </div>
+    </div>
+    <div class="window-body">
+      <h1>Email Client Setup Instructions</h1>
+
+      <p><strong>Note:</strong> We do not currently support <code>autodiscover</code> or <code>autoconfig</code>. You will need to manually enter server settings in your email client.</p>
+
+      <p><strong>Only secure SSL/TLS connections are supported.</strong> Unencrypted protocols are not allowed.</p>
+
+      <h2>Incoming Mail (IMAP)</h2>
+      <ul>
+        <li>Server: <code>mail.namp.xyz</code></li>
+        <li>Port: <code>993</code></li>
+        <li>Security: <code>SSL/TLS</code></li>
+        <li>Authentication: <code>Normal Password</code></li>
+      </ul>
+
+      <h2>Incoming Mail (POP3)</h2>
+      <ul>
+        <li>Server: <code>mail.namp.xyz</code></li>
+        <li>Port: <code>995</code></li>
+        <li>Security: <code>SSL/TLS</code></li>
+        <li>Authentication: <code>Normal Password</code></li>
+      </ul>
+
+      <h2>Outgoing Mail (SMTP)</h2>
+      <ul>
+        <li>Server: <code>mail.namp.xyz</code></li>
+        <li>Port: <code>465</code></li>
+        <li>Security: <code>SSL/TLS</code></li>
+        <li>Authentication: <code>Required</code></li>
+        <li>Username: <code>your full email address</code></li>
+      </ul>
+
+      <p>If your client asks for username and password for sending/receiving, use your full email address and password you created during signup.</p>
+    </div>
+  </div>
+</body>
+</html>
