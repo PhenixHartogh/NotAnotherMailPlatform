@@ -1,6 +1,6 @@
-# [Not Another Mail Platform](https://namp.xyx)
+# [Not Another Mail Platform](https://namp.xyz)
 
-**[Not Another Mail Platform](https://namp.xyz** is a mail service that allows people to create email addresses using joke domains.  
+**[Not Another Mail Platform](https://namp.xyz)** is a mail service that allows people to create email addresses using joke domains.  
 It is powered by cPanel, hCaptcha, and Roundcube to create a public-use email platform.
 
 ---
